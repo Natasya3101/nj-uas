@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="form login" id="login">
+      <form name="login" id="login-form" display: flex; flex-direction: column; gap: 10px;>
+        <h2>Register</h2>
+        <div class="input">
+          <label for="login">Username</label>
+          <input id="login-user" name="username" type="text" placeholder="masukan nama di sini">
+        </div>
+        <div class="input">
+          <label id="login-password" for="login">Password</label>
+          <input name="password" type="password" placeholder="masukan password">
+        </div>
+        <div class="remember">
+          <label><input type="checkbox"> Remember me</label>
+        </div>
+        <button>Daftar</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  document.querySelector("button").onclick = async (e) => {
+    e.preventDefault();
+    const username = document.login.username.value;
+    const password = document.login.password.value;
+    // untuk mengubah menjadi json
+    await fetch("/api/register", {
+      method: "POST", // untuk menginput
+      headers: {
+        "Content-Type": "application/json", // mengubah nilai yang di input menjadi json
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    alert("Your Account is Registered"); // pemberitahuan
+    location.href = "/login"; // terhubung ke hal brktnya
+  };
+</script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: 100%;
+    background-image: url(https://i.pinimg.com/564x/7c/c6/37/7cc6371b12bdcae59e0cd65dd669ab5e.jpg);
+  }
+
+
+
+  .container {
+    position: relative;
+    width: 400px;
+    height: 350px;
+    background: #73bde2ae;
+    border-radius: 15px;
+    padding: 40px;
+    
+  }
+
+  .form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    transition: 1s ease-in-out;
+  }
+
+  .container.active .form.login {
+    transform: scale(0);
+    translate: (-300px, 500px);
+  }
+
+  h2 {
+    font-size: 30px;
+    color: black;
+    text-align: center;
+    font-family: monospace;
+  }
+
+
+  .input {
+    position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid lemonchiffon;
+  }
+
+  .input label {
+    position: absolute;
+    top: 10%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: rgb(18, 19, 19);
+    pointer-events: none;
+    transition: .5s;
+  }
+
+  .input input {
+    width: 320px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+
+  .remember {
+    margin: -5px 0 15px 5px;
+
+  }
+
+  .remember label {
+    color: rgb(18, 19, 19);
+    font-size: 15px;
+  }
+
+  .remember label input {
+    accent-color: lemonchiffon;
+  }
+
+  button {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    background: rgb(229, 217, 107);
+    color: black;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-family: monospace;
+  }
+</style>
