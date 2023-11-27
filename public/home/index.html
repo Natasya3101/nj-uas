@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    WELCOME
+    <p><a href="/me">check my status</a></p>
+    <button id="logout">Log Out</button>
+</body>
+<script>
+    const logout = document.querySelector("#logout");
+    logout.onclick = ()=> {
+        fetch("/api/logout").then((response)=>{
+            if (response.ok) {
+                location.href = "/login";
+            }
+
+        })
+    };
+</script>
+
+</html>

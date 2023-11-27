@@ -13,7 +13,7 @@
   <div class="container">
     <div class="form login" id="login">
       <form name="login" id="login-form" display: flex; flex-direction: column; gap: 10px;>
-        <h2>Register</h2>
+        <h2>Login</h2>
         <div class="input">
           <label for="login">Username</label>
           <input id="login-user" name="username" type="text" placeholder="masukan nama di sini">
@@ -25,7 +25,7 @@
         <div class="remember">
           <label><input type="checkbox"> Remember me</label>
         </div>
-        <button>Daftar</button>
+        <button>Login</button>
       </form>
     </div>
   </div>
@@ -38,7 +38,7 @@
     const username = document.login.username.value;
     const password = document.login.password.value;
     // untuk mengubah menjadi json
-    await fetch("/api/register", {
+    await fetch("/api/login", {
       method: "POST", // untuk menginput
       headers: {
         "Content-Type": "application/json", // mengubah nilai yang di input menjadi json
@@ -47,10 +47,16 @@
         username,
         password,
       }),
+    }).then(async (response)=> {
+        if(response.ok){
+            console.log("asas");
+            location.href = "/home";
+        }else{
+            const message = await response.text();
+            alert(message);
+        }
     });
-    alert("Your Account is Registered"); // pemberitahuan
-    location.href = "/login"; // terhubung ke hal brktnya
-  };
+};
 </script>
 <style>
   * {
